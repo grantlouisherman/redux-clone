@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Notes from './Notes';
+import { reducer } from './rootReducer';
+
+const CREATE_NOTE = 'CREATE_NOTE';
+const UPDATE_NOTE = 'UPDATE_NOTE';
 
 class App extends Component {
   render() {
+    const state0 = reducer(undefined, {
+      type: CREATE_NOTE
+    });
+
+    const state01 = reducer(state0, {
+      type: UPDATE_NOTE,
+      id: 1,
+      content: 'Hello, world!'
+    });
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Notes notes={state01} />
       </div>
     );
   }
